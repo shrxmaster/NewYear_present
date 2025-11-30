@@ -1,0 +1,61 @@
+Create a web game called “Ainazik and the Star’s Glow” — an interactive story with multiple chapters and simple mini-games. The game should have a warm, magical New Year atmosphere. It must run in the browser using only HTML, CSS, and vanilla JavaScript.
+
+STORY STRUCTURE (include in dialogues and scene descriptions):
+
+Ainazik discovers an old New Year star while cleaning the attic. The star once illuminated the town every New Year’s Eve, bringing people hope and warmth. But now it has lost its glow because four Memory Crystals have disappeared. Each crystal represents something important: Kindness, Memories, Courage, and Unity. 
+Ainazik begins a journey through different parts of the town and forest to recover them and restore the star’s magic.
+
+CHAPTERS & REQUIREMENTS:
+
+1. **Start Screen**
+   - Title: “Ainazik and the Star’s Glow”
+   - Short story introduction:
+     “While searching the attic, Ainazik finds a family New Year star that has lost its light. To restore it, she must find four Memory Crystals hidden around the town.”
+   - Start button
+   - Optional theme color selector (default: pastel blue)
+
+2. **Chapter 1: The Attic**
+   - Simple dialogue where Ainazik notices the star flickering weakly.
+   - The star explains (in text) that its crystals are scattered.
+   - Transition button: “Begin the Journey”
+
+3. **Chapter 2: Cozy Street — Crystal of Kindness**
+   - Scene description: a calm street with lights and neighbors preparing for New Year.
+   - Mini-game: Memory (match pairs like “Help” → “Thank You”)
+   - After completing: short story moment where neighbors thank Ainazik.
+   - She receives the **Crystal of Kindness**.
+
+4. **Chapter 3: Market — Crystal of Memories**
+   - Scene description: busy winter market with foods, crafts, decorations.
+   - Mini-game: find/click objects (shopping list from a friendly vendor).
+   - Short dialogue: The vendor remembers Ainazik visiting the market years ago.
+   - She gets the **Crystal of Memories**.
+
+5. **Chapter 4: Winter Forest — Crystal of Courage**
+   - Scene description: quiet snowy forest, soft music, moonlight.
+   - Mini-game: 3x3 sliding puzzle to “clear the frozen path”.
+   - Short dialogue about staying calm and brave in the unknown.
+   - She gets the **Crystal of Courage**.
+
+6. **Chapter 5: Celebration Square — Crystal of Unity**
+   - Scene description: the town is preparing the main New Year tree.
+   - Mini-game: rhythm/timing game to sync the festive lights.
+   - After success, the townspeople cheer.
+   - Ainazik receives the **Crystal of Unity**.
+
+7. **Final Scene**
+   - Back at the attic, Ainazik places all four crystals into the star.
+   - Add a simple animation of the star lighting up.
+   - Show text: “Happy New Year, Ainazik!”
+   - Add button: “View Collection” (opens a page showing collected items/postcards).
+
+TECHNICAL REQUIREMENTS:
+- Use only vanilla JS; no external frameworks.
+- Scenes can be separate HTML sections or dynamically loaded content.
+- Mini-games should be simple but working prototypes.
+- Add clean code, comments, and a README explaining:
+  - How to run the game on Replit.
+  - Where to edit story text and final message.
+- Create a folder /assets for images and sounds; placeholders are fine.
+
+Make the overall tone gentle, cozy, and magical. The story should feel warm, kind, and New Year themed.
