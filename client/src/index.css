@@ -46,8 +46,8 @@
   --font-sans: Quicksand, sans-serif;
   --font-serif: Lato, serif;
   --font-mono: Menlo, monospace;
-  --font-display: Fredoka, sans-serif;
-  --font-story: Lato, serif;
+  --font-display: Playfair Display, serif;
+  --font-story: Montserrat, sans-serif;
   --radius: .5rem;
   --crystal-kindness: 340 75% 65%;
   --crystal-memories: 280 65% 60%;
@@ -299,4 +299,25 @@
   .border.hover-elevate:not(.no-hover-interaction-elevate)::after {
     inset: -1px;
   }
+}
+
+/* Theme Color Variants */
+:root.theme-blue {
+  --primary: 210 70% 55%;
+  --accent: 200 80% 55%;
+}
+
+:root.theme-pink {
+  --primary: 340 75% 65%;
+  --accent: 340 75% 65%;
+}
+
+:root.theme-purple {
+  --primary: 280 65% 60%;
+  --accent: 280 65% 60%;
+}
+
+:root.theme-mint {
+  --primary: 160 55% 45%;
+  --accent: 160 55% 45%;
 }

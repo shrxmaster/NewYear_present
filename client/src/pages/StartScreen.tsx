@@ -34,7 +34,7 @@ export default function StartScreen() {
   return (
     <SceneWrapper
       showProgress={false}
-      backgroundClass="bg-gradient-to-b from-slate-900 via-indigo-950 to-slate-900 dark:from-slate-950 dark:via-indigo-950 dark:to-slate-950"
+      backgroundClass="bg-gradient-to-b from-green-950 via-red-950 to-green-950"
     >
       <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12">
         <button
@@ -61,12 +61,12 @@ export default function StartScreen() {
             className="font-display text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-amber-200 via-yellow-300 to-amber-200 bg-clip-text text-transparent"
             data-testid="text-game-title"
           >
-            Ainazik and the Star's Glow
+            Новогоднее путешествие
           </h1>
 
           <p className="font-story text-lg md:text-xl text-slate-300 dark:text-slate-400 leading-relaxed mb-8 max-w-xl">
-            While searching the attic, Ainazik finds a family New Year star that has lost its
-            light. To restore it, she must find four Memory Crystals hidden around the town.
+            Ища вещи на чердаке, Айназик находит семейную новогоднюю звезду, которая потеряла своё сияние. 
+            Чтобы вернуть свет, ей нужно найти четыре Кристалла Памяти, спрятанные по всему городу.
           </p>
 
           <div className="flex items-center gap-4 mb-8">
@@ -81,7 +81,7 @@ export default function StartScreen() {
               icon="sparkle"
               data-testid="button-start-game"
             >
-              {hasSavedProgress ? "New Game" : "Begin Journey"}
+              {hasSavedProgress ? "Новая игра" : "Начать путешествие"}
             </GameButton>
 
             {hasSavedProgress && (
@@ -92,7 +92,7 @@ export default function StartScreen() {
                 icon="next"
                 data-testid="button-continue-game"
               >
-                Continue
+                Продолжить
               </GameButton>
             )}
           </div>
@@ -103,7 +103,7 @@ export default function StartScreen() {
               className="mt-6 text-sm text-slate-500 hover:text-slate-400 transition-colors underline underline-offset-4"
               data-testid="button-reset-game"
             >
-              Reset Progress
+              Сбросить прогресс
             </button>
           )}
         </div>

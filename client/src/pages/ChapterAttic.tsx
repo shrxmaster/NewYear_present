@@ -8,32 +8,32 @@ import { Sparkles, Box, Lamp } from "lucide-react";
 
 const dialogues = [
   {
-    speaker: "Narrator",
-    text: "In the dusty corners of grandmother's attic, among forgotten treasures and faded memories, Ainazik's hand brushes against something cold and familiar...",
+    speaker: "Рассказчик",
+    text: "В пыльных уголках бабушкиного чердака, среди забытых вещей и выцветших воспоминаний, рука Айназик касается чего-то холодного и знакомого...",
   },
   {
-    speaker: "Ainazik",
-    text: "What's this? Oh! It's the old New Year star! I remember when it used to shine so brightly at the top of our tree...",
+    speaker: "Айназик",
+    text: "Что это? О! Это же старая новогодняя звезда! Помню, как ярко она сияла на вершине нашей ёлки...",
   },
   {
-    speaker: "The Star",
-    text: "Ainazik... you found me. For years I have waited, growing dimmer with each passing winter. My light has faded because my Memory Crystals have been scattered across the town.",
+    speaker: "Звезда",
+    text: "Айназик... ты нашла меня. Годы я ждала, становясь всё тусклее с каждой зимой. Мой свет угас, потому что мои Кристаллы Памяти были рассеяны по всему городу.",
   },
   {
-    speaker: "Ainazik",
-    text: "Memory Crystals? I've never heard of them before.",
+    speaker: "Айназик",
+    text: "Кристаллы Памяти? Никогда о таких не слышала.",
   },
   {
-    speaker: "The Star",
-    text: "There are four crystals, each holding a precious memory: Kindness from the Cozy Street, Memories from the Market, Courage from the Winter Forest, and Unity from the Celebration Square.",
+    speaker: "Звезда",
+    text: "Есть четыре кристалла, каждый хранит важную память: Доброту с Уютной Улицы, Воспоминания с Рыночной Площади, Смелость из Зимнего Леса и Единство с Площади Праздника.",
   },
   {
-    speaker: "Ainazik",
-    text: "I'll find them all! The town needs your light for the New Year celebration.",
+    speaker: "Айназик",
+    text: "Я найду их все! Город нуждается в твоём свете для новогоднего праздника.",
   },
   {
-    speaker: "The Star",
-    text: "Thank you, dear Ainazik. Your journey begins now. May the warmth in your heart guide you...",
+    speaker: "Звезда",
+    text: "Спасибо тебе, Айназик. Твоё путешествие начинается сейчас. Пусть тепло в твоём сердце станет твоим проводником...",
   },
 ];
 
@@ -56,7 +56,7 @@ export default function ChapterAttic() {
   return (
     <SceneWrapper
       showSnow={false}
-      backgroundClass="bg-gradient-to-b from-amber-950/90 via-stone-900 to-stone-950"
+      backgroundClass="bg-gradient-to-b from-green-950/90 via-red-900 to-red-950"
     >
       <div className="min-h-screen flex flex-col items-center justify-between px-6 py-20">
         <div className="text-center mb-8 animate-fade-in-up">
@@ -64,7 +64,7 @@ export default function ChapterAttic() {
             Chapter 1
           </span>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-amber-100" data-testid="text-chapter-title">
-            The Attic
+            Чердак
           </h2>
         </div>
 
@@ -113,7 +113,7 @@ export default function ChapterAttic() {
             icon="next"
             data-testid="button-next-dialogue"
           >
-            {isLastDialogue ? "Begin the Journey" : "Continue"}
+            {isLastDialogue ? "Начать путешествие" : "Продолжить"}
           </GameButton>
         </div>
       </div>

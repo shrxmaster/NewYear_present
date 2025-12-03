@@ -4,7 +4,22 @@ import { SceneWrapper } from "@/components/game/SceneWrapper";
 import { DialogueBox } from "@/components/game/DialogueBox";
 import { GameButton } from "@/components/game/GameButton";
 import { CrystalDisplay } from "@/components/game/CrystalDisplay";
-import { ShoppingBag, Gift, Cookie, Coffee, Candy, Apple, Check } from "lucide-react";
+import {
+  ShoppingBag,
+  Gift,
+  Cookie,
+  Coffee,
+  Candy,
+  Apple,
+  Check,
+  Sparkles,
+  Heart,
+  Music,
+  Snowflake,
+  Lightbulb,
+  Package,
+  X
+} from "lucide-react";
 
 interface MarketItem {
   id: string;
@@ -12,16 +27,26 @@ interface MarketItem {
   icon: typeof ShoppingBag;
   found: boolean;
   position: { x: number; y: number };
+  required?: boolean;
+  wrong?: boolean;
 }
 
-const shoppingList = ["Gift Box", "Cookies", "Hot Cocoa", "Candy Cane", "Apple"];
+const shoppingList = ["Подарочная коробка", "Печенье", "Горячее какао", "Карамельная трость", "Яблоко"];
 
 const initialItems: MarketItem[] = [
-  { id: "gift", name: "Gift Box", icon: Gift, found: false, position: { x: 15, y: 30 } },
-  { id: "cookie", name: "Cookies", icon: Cookie, found: false, position: { x: 70, y: 45 } },
-  { id: "cocoa", name: "Hot Cocoa", icon: Coffee, found: false, position: { x: 45, y: 65 } },
-  { id: "candy", name: "Candy Cane", icon: Candy, found: false, position: { x: 25, y: 55 } },
-  { id: "apple", name: "Apple", icon: Apple, found: false, position: { x: 80, y: 25 } },
+  { id: "gift", name: "Подарочная коробка", icon: Gift, found: false, position: { x: 15, y: 30 }, required: true },
+  { id: "cookie", name: "Печенье", icon: Cookie, found: false, position: { x: 70, y: 45 }, required: true },
+  { id: "cocoa", name: "Горячее какао", icon: Coffee, found: false, position: { x: 45, y: 65 }, required: true },
+  { id: "candy", name: "Карамельная трость", icon: Candy, found: false, position: { x: 25, y: 55 }, required: true },
+  { id: "apple", name: "Яблоко", icon: Apple, found: false, position: { x: 80, y: 25 }, required: true },
+
+  // Бонусные предметы
+  { id: "ornament", name: "Ёлочная игрушка", icon: Sparkles, found: false, position: { x: 35, y: 20 }, required: false },
+  { id: "bell", name: "Колокольчик", icon: Music, found: false, position: { x: 60, y: 35 }, required: false },
+  { id: "snowflake", name: "Снежинка", icon: Snowflake, found: false, position: { x: 50, y: 50 }, required: false },
+  { id: "ribbon", name: "Лента", icon: Heart, found: false, position: { x: 75, y: 60 }, required: false },
+  { id: "lantern", name: "Фонарь", icon: Lightbulb, found: false, position: { x: 10, y: 70 }, required: false },
+  { id: "wrapping", name: "Упаковочная бумага", icon: Package, found: false, position: { x: 88, y: 50 }, required: false },
 ];
 
 type GamePhase = "intro" | "game" | "success";
@@ -37,14 +62,31 @@ export default function ChapterMarket() {
     const item = items.find((i) => i.id === itemId);
     if (!item || item.found) return;
 
+    const isRequired = item.required !== false;
+
+    if (!isRequired) {
+      setItems((prev) =>
+        prev.map((i) => (i.id === itemId ? { ...i, wrong: true } : i))
+      );
+      setTimeout(() => {
+        setItems((prev) =>
+          prev.map((i) => (i.id === itemId ? { ...i, wrong: false } : i))
+        );
+      }, 1500);
+      return;
+    }
+
     setItems((prev) =>
       prev.map((i) => (i.id === itemId ? { ...i, found: true } : i))
     );
 
-    const newCount = foundCount + 1;
+    const requiredItems = items.filter((i) => i.required !== false);
+    const foundRequiredCount = items.filter((i) => i.found || i.id === itemId).filter((i) => i.required !== false).length;
+
+    const newCount = foundRequiredCount;
     setFoundCount(newCount);
 
-    if (newCount === items.length) {
+    if (newCount === requiredItems.length) {
       setTimeout(() => {
         setShowCrystal(true);
         setTimeout(() => {
@@ -61,35 +103,34 @@ export default function ChapterMarket() {
   };
 
   return (
-    <SceneWrapper backgroundClass="bg-gradient-to-b from-purple-900 via-violet-950 to-slate-900">
+    <SceneWrapper backgroundClass="bg-gradient-to-b from-green-900 via-red-950 to-red-900">
       <div className="min-h-screen flex flex-col items-center px-6 py-20">
         <div className="text-center mb-8 animate-fade-in-up">
           <span className="inline-block px-4 py-1 bg-purple-800/50 rounded-full text-purple-300 text-sm font-medium mb-2">
-            Chapter 3
+            Глава 3
           </span>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-purple-100" data-testid="text-chapter-title">
-            The Market
+            Рынок
           </h2>
         </div>
 
         {phase === "intro" && (
           <div className="flex flex-col items-center gap-6 animate-fade-in-up max-w-2xl">
-            <DialogueBox speaker="Narrator">
+            <DialogueBox speaker="Рассказчик">
               <p>
-                The winter market bustles with life — vendors call out their wares, the scent of
-                fresh pastries fills the air, and colorful decorations dance in the cold breeze. A
-                friendly vendor needs help finding items for a special New Year gift basket.
+                Зимний рынок оживает — торговцы наперебой предлагают товар, в воздухе витает запах
+                свежей выпечки, а цветные украшения тихо звенят на ветру. Продавцу нужна помощь —
+                он собирает праздничную корзину к Новому году.
               </p>
             </DialogueBox>
-            <DialogueBox speaker="Vendor">
+            <DialogueBox speaker="Продавец">
               <p>
-                "Ainazik! I remember you from years past. Your grandmother used to bring you here
-                every New Year's Eve. Could you help me find these items? My old eyes aren't what
-                they used to be..."
+                "Айназик! Я узнал тебя сразу. Ты приходила сюда вместе с бабушкой каждый Новый год.
+                Поможешь мне найти эти вещи? Глаза уже не те..."
               </p>
             </DialogueBox>
             <GameButton onClick={() => setPhase("game")} data-testid="button-start-game">
-              Help the Vendor
+              Помочь продавцу
             </GameButton>
           </div>
         )}
@@ -97,7 +138,7 @@ export default function ChapterMarket() {
         {phase === "game" && (
           <div className="flex flex-col items-center gap-6 animate-fade-in-up w-full max-w-4xl">
             <div className="flex flex-wrap justify-center gap-2 mb-4 p-4 bg-slate-800/50 rounded-2xl">
-              <span className="text-purple-200 font-medium mr-2">Shopping List:</span>
+              <span className="text-purple-200 font-medium mr-2">Список покупок:</span>
               {shoppingList.map((item, i) => {
                 const isFound = items.find((it) => it.name === item)?.found;
                 return (
@@ -147,12 +188,14 @@ export default function ChapterMarket() {
                   <button
                     key={item.id}
                     onClick={() => handleItemClick(item.id)}
-                    disabled={item.found}
+                    disabled={item.found || item.wrong}
                     className={`
                       absolute p-3 rounded-xl transition-all duration-300 transform
-                      ${item.found
-                        ? "bg-green-500/30 scale-90 cursor-default"
-                        : "bg-purple-500/40 hover:bg-purple-400/50 hover:scale-110 cursor-pointer"
+                      ${item.wrong
+                        ? "bg-red-500/50 scale-110 cursor-default"
+                        : item.found
+                          ? "bg-green-500/30 scale-90 cursor-default"
+                          : "bg-purple-500/40 hover:bg-purple-400/50 hover:scale-110 cursor-pointer"
                       }
                     `}
                     style={{
@@ -162,7 +205,9 @@ export default function ChapterMarket() {
                     }}
                     data-testid={`market-item-${item.id}`}
                   >
-                    {item.found ? (
+                    {item.wrong ? (
+                      <X className="w-6 h-6 md:w-8 md:h-8 text-red-100" />
+                    ) : item.found ? (
                       <Check className="w-6 h-6 md:w-8 md:h-8 text-green-400" />
                     ) : (
                       <Icon className="w-6 h-6 md:w-8 md:h-8 text-purple-100" />
@@ -173,14 +218,19 @@ export default function ChapterMarket() {
             </div>
 
             <p className="text-purple-300 font-medium">
-              Found: {foundCount}/{items.length}
+              Найдено: {foundCount}/{items.filter((i) => i.required !== false).length}
+              {items.filter((i) => !i.required && i.found).length > 0 && (
+                <span className="text-amber-300 ml-2">
+                  +{items.filter((i) => !i.required && i.found).length} бонус!
+                </span>
+              )}
             </p>
 
             {showCrystal && (
               <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50 animate-fade-in-up">
                 <div className="flex flex-col items-center gap-4 p-8 bg-card/95 rounded-3xl">
                   <CrystalDisplay type="memories" collected size="lg" animate />
-                  <p className="font-display text-xl text-foreground">Crystal of Memories Found!</p>
+                  <p className="font-display text-xl text-foreground">Кристалл Воспоминаний найден!</p>
                 </div>
               </div>
             )}
@@ -190,16 +240,16 @@ export default function ChapterMarket() {
         {phase === "success" && (
           <div className="flex flex-col items-center gap-6 animate-fade-in-up max-w-2xl">
             <CrystalDisplay type="memories" collected size="lg" />
-            <DialogueBox speaker="Vendor">
+            <DialogueBox speaker="Продавец">
               <p>
-                "Wonderful! You've found everything. You know, these items remind me of the basket
-                your grandmother prepared every year. She always said the best gifts are made with
-                love and memories. Take this crystal — it holds all the cherished moments of markets
-                past."
+                "Прекрасно! Ты нашла всё. Эти вещи напоминают мне о тех корзинах, которые твоя
+                бабушка собирала каждый год. Она говорила, что лучшие подарки — это те, что сделаны
+                с любовью и воспоминаниями. Возьми этот кристалл — в нём все тёплые моменты рынков
+                прошлого."
               </p>
             </DialogueBox>
             <GameButton onClick={handleContinue} size="lg" data-testid="button-continue">
-              Continue to the Forest
+              Продолжить в Лес
             </GameButton>
           </div>
         )}

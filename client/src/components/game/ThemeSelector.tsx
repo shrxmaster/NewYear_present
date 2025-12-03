@@ -2,10 +2,10 @@ import { useGame } from "@/lib/game-context";
 import { type ThemeColor } from "@shared/schema";
 
 const themeColors: { value: ThemeColor; label: string; gradient: string }[] = [
-  { value: "blue", label: "Winter Blue", gradient: "from-sky-400 to-blue-500" },
-  { value: "pink", label: "Rose Pink", gradient: "from-pink-400 to-rose-500" },
-  { value: "purple", label: "Twilight Purple", gradient: "from-purple-400 to-violet-500" },
-  { value: "mint", label: "Mint Green", gradient: "from-emerald-400 to-teal-500" },
+  { value: "blue", label: "Зимний синий", gradient: "from-sky-400 to-blue-500" },
+  { value: "pink", label: "Розовый закат", gradient: "from-pink-400 to-rose-500" },
+  { value: "purple", label: "Фиолетовый сумрак", gradient: "from-purple-400 to-violet-500" },
+  { value: "mint", label: "Мятный зелёный", gradient: "from-emerald-400 to-teal-500" },
 ];
 
 export function ThemeSelector() {
@@ -13,7 +13,7 @@ export function ThemeSelector() {
 
   return (
     <div className="flex items-center gap-3" data-testid="theme-selector">
-      <span className="text-sm text-muted-foreground font-medium">Theme:</span>
+      <span className="text-sm text-muted-foreground font-medium">Тема:</span>
       <div className="flex gap-2">
         {themeColors.map((theme) => (
           <button

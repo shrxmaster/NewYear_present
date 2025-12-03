@@ -123,14 +123,14 @@ export default function ChapterSquare() {
   ];
 
   return (
-    <SceneWrapper backgroundClass="bg-gradient-to-b from-amber-900 via-orange-950 to-slate-900">
+    <SceneWrapper backgroundClass="bg-gradient-to-b from-yellow-900 via-red-950 to-green-950">
       <div className="min-h-screen flex flex-col items-center px-6 py-20">
         <div className="text-center mb-8 animate-fade-in-up">
           <span className="inline-block px-4 py-1 bg-amber-800/50 rounded-full text-amber-300 text-sm font-medium mb-2">
-            Chapter 5
+            Глава 5
           </span>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-amber-100" data-testid="text-chapter-title">
-            Celebration Square
+            Площадь Празднования
           </h2>
         </div>
 
@@ -152,21 +152,18 @@ export default function ChapterSquare() {
 
         {phase === "intro" && (
           <div className="flex flex-col items-center gap-6 animate-fade-in-up max-w-2xl">
-            <DialogueBox speaker="Narrator">
+            <DialogueBox speaker="Рассказчик">
               <p>
-                The Celebration Square is alive with excitement! Townspeople are decorating the
-                grand New Year tree, and festive lights are ready to be synchronized. To earn the
-                Crystal of Unity, Ainazik must help coordinate the light show.
+                Площадь Празднования наполнена радостью! Жители украшают большую новогоднюю ёлку, а световые гирлянды ждут синхронизации. Чтобы получить Кристалл Единства, Айназик должна помочь настроить световое шоу.
               </p>
             </DialogueBox>
-            <DialogueBox speaker="Town Elder">
+            <DialogueBox speaker="Старейшина города">
               <p>
-                "Ainazik! The lights need to be synchronized for the countdown. Tap the colored
-                lanes when the lights appear to create perfect harmony. Show us what unity means!"
+                «Айназик! Нам нужно синхронизировать огни перед обратным отсчётом. Нажимай на цветные дорожки, когда появятся огоньки, чтобы создать идеальную гармонию. Покажи нам, что значит единство!»
               </p>
             </DialogueBox>
             <GameButton onClick={startGame} data-testid="button-start-game">
-              Sync the Lights
+              Синхронизировать огни
             </GameButton>
           </div>
         )}
@@ -175,7 +172,7 @@ export default function ChapterSquare() {
           <div className="flex flex-col items-center gap-6 animate-fade-in-up">
             <div className="flex items-center gap-4 mb-4">
               <span className="text-amber-200 font-medium">
-                Score: {score}/{targetScore}
+                Очки: {score}/{targetScore}
               </span>
               <div className="w-32 h-3 bg-slate-700 rounded-full overflow-hidden">
                 <div
@@ -226,14 +223,14 @@ export default function ChapterSquare() {
             </div>
 
             <p className="text-amber-300/70 text-sm">
-              Tap the lanes when lights appear to sync the festive display!
+              Нажимай на дорожки, когда появляются огни, чтобы синхронизировать праздничное шоу!
             </p>
 
             {showCrystal && (
               <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50 animate-fade-in-up">
                 <div className="flex flex-col items-center gap-4 p-8 bg-card/95 rounded-3xl">
                   <CrystalDisplay type="unity" collected size="lg" animate />
-                  <p className="font-display text-xl text-foreground">Crystal of Unity Found!</p>
+                  <p className="font-display text-xl text-foreground">Кристалл Единства найден!</p>
                 </div>
               </div>
             )}
@@ -243,20 +240,18 @@ export default function ChapterSquare() {
         {phase === "success" && (
           <div className="flex flex-col items-center gap-6 animate-fade-in-up max-w-2xl">
             <CrystalDisplay type="unity" collected size="lg" />
-            <DialogueBox speaker="Town Elder">
+            <DialogueBox speaker="Старейшина города">
               <p>
-                "Magnificent! You've brought everyone together in perfect harmony. This is what
-                unity truly means — working together, supporting each other, and creating something
-                beautiful as one. Take this crystal, dear Ainazik. You've earned it."
+                «Превосходно! Ты объединила всех в идеальной гармонии. Вот что значит единство — работать вместе, поддерживать друг друга и создавать что-то прекрасное. Возьми этот кристалл, Айназик. Ты его заслужила».
               </p>
             </DialogueBox>
-            <DialogueBox speaker="Townspeople" className="text-center">
+            <DialogueBox speaker="Жители города" className="text-center">
               <p>
-                "Thank you, Ainazik! Happy New Year!"
+                «Спасибо, Айназик! С Новым годом!»
               </p>
             </DialogueBox>
             <GameButton onClick={handleContinue} size="lg" data-testid="button-continue">
-              Return to the Attic
+              Вернуться на чердак
             </GameButton>
           </div>
         )}

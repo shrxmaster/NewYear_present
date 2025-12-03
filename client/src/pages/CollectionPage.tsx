@@ -15,13 +15,13 @@ const crystalIcons: Record<CrystalType, typeof Heart> = {
 
 const crystalStories: Record<CrystalType, string> = {
   kindness:
-    "Found on the Cozy Street, where neighbors shared acts of kindness and warmth. The memory matching game revealed the beautiful connections between giving and receiving.",
+    "Найден на Уютной улице, где соседи делились добротой и теплом. Игра на сопоставление памяти раскрыла красивые связи между даванием и получением.",
   memories:
-    "Discovered at the bustling Market, where the friendly vendor remembered years of New Year traditions. Each found item brought back precious memories of celebrations past.",
+    "Обнаружен на оживлённом рынке, где дружелюбный торговец помнил годы новогодних традиций. Каждый найденный предмет возвращал драгоценные воспоминания о прошлых праздниках.",
   courage:
-    "Retrieved from the quiet Winter Forest, where the frozen path required patience and bravery. The sliding puzzle taught that courage means taking one step at a time.",
+    "Добыт в тихом Зимнем лесу, где замёрзшая тропинка требовала терпения и смелости. Скользящая головоломка показала, что смелость — это делать шаг за шагом.",
   unity:
-    "Earned at the Celebration Square, where the whole town came together to create a harmonious light show. Unity means moving as one toward a shared goal.",
+    "Заработан на Площади Празднования, где весь город объединялся для гармоничного светового шоу. Единство означает двигаться вместе к общей цели.",
 };
 
 export default function CollectionPage() {
@@ -34,7 +34,7 @@ export default function CollectionPage() {
   return (
     <SceneWrapper
       showProgress={false}
-      backgroundClass="bg-gradient-to-b from-slate-900 via-indigo-950 to-slate-900"
+      backgroundClass="bg-gradient-to-b from-red-950 via-green-950 to-red-950"
     >
       <div className="min-h-screen flex flex-col px-6 py-12">
         <div className="flex items-center justify-between mb-8">
@@ -45,24 +45,26 @@ export default function CollectionPage() {
             data-testid="button-back"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back
+            Назад
           </GameButton>
 
           <h1
             className="font-display text-3xl md:text-4xl font-bold text-amber-100"
             data-testid="text-collection-title"
           >
-            Crystal Collection
+            Коллекция кристаллов
           </h1>
 
           <div className="w-24" />
         </div>
 
         <div className="flex-1 flex flex-col items-center gap-8">
-          <div className="text-center mb-4">
-            <Star lit={allCollected} size="lg" />
+          <div className="text-center mb-4 flex flex-col items-center">
+            <div className="flex justify-center">
+              <Star lit={allCollected} size="lg" />
+            </div>
             <p className="mt-4 text-lg text-slate-300 font-medium">
-              {collectedCount}/4 Crystals Collected
+              {collectedCount}/4 Кристаллов собрано
             </p>
           </div>
 
@@ -121,7 +123,7 @@ export default function CollectionPage() {
                           ${collected ? "text-muted-foreground" : "text-slate-600"}
                         `}
                       >
-                        {collected ? crystalStories[type] : "Not yet discovered..."}
+                        {collected ? crystalStories[type] : "Ещё не найдено..."}
                       </p>
                     </div>
                   </div>
@@ -132,7 +134,7 @@ export default function CollectionPage() {
                         <div className="w-12 h-12 mx-auto mb-2 rounded-full bg-slate-700/50 flex items-center justify-center">
                           <Icon className="w-6 h-6 text-slate-500" />
                         </div>
-                        <p className="text-slate-500 font-medium">Locked</p>
+                        <p className="text-slate-500 font-medium">Заблокировано</p>
                       </div>
                     </div>
                   )}
@@ -144,12 +146,11 @@ export default function CollectionPage() {
           {allCollected && (
             <div className="mt-8 p-6 bg-gradient-to-r from-amber-900/30 via-orange-900/30 to-amber-900/30 rounded-3xl border border-amber-500/20 max-w-2xl text-center animate-fade-in-up">
               <h3 className="font-display text-2xl text-amber-200 mb-3">
-                Collection Complete!
+                Коллекция завершена!
               </h3>
               <p className="font-story text-amber-100/80 leading-relaxed">
-                Ainazik has gathered all four Memory Crystals and restored the Star's magical glow.
-                The spirit of New Year lives on through kindness, cherished memories, courage, and
-                the unity of loved ones.
+                Айназик собрала все четыре Кристалла Памяти и восстановила магическое сияние Звезды.
+                Дух Нового года живёт через доброту, дорогие воспоминания, смелость и единство близких.
               </p>
             </div>
           )}
@@ -157,7 +158,7 @@ export default function CollectionPage() {
 
         <div className="mt-8 text-center">
           <p className="text-slate-500 text-sm">
-            Thank you for playing "Ainazik and the Star's Glow"
+            Спасибо за игру "Айназик и Сияние Звезды"
           </p>
         </div>
       </div>

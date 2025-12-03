@@ -15,10 +15,10 @@ interface MemoryCard {
 }
 
 const memoryPairs = [
-  { value: "Help", pair: "Thank You" },
-  { value: "Give", pair: "Receive" },
-  { value: "Share", pair: "Together" },
-  { value: "Smile", pair: "Warmth" },
+  { value: "Снег", pair: "Тишина" },
+  { value: "Мечта", pair: "Надежда" },
+  { value: "Уют", pair: "Плед" },
+  { value: "Смех", pair: "Друзья" },
 ];
 
 function shuffleArray<T>(array: T[]): T[] {
@@ -107,14 +107,14 @@ export default function ChapterCozyStreet() {
   };
 
   return (
-    <SceneWrapper backgroundClass="bg-gradient-to-b from-slate-800 via-indigo-900 to-slate-900">
+    <SceneWrapper backgroundClass="bg-gradient-to-b from-red-900 via-green-950 to-red-950">
       <div className="min-h-screen flex flex-col items-center px-6 py-20">
         <div className="text-center mb-8 animate-fade-in-up">
           <span className="inline-block px-4 py-1 bg-pink-900/50 rounded-full text-pink-300 text-sm font-medium mb-2">
-            Chapter 2
+            Глава 2
           </span>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-pink-100" data-testid="text-chapter-title">
-            Cozy Street
+            Уютная Улица
           </h2>
         </div>
 
@@ -141,15 +141,15 @@ export default function ChapterCozyStreet() {
 
         {phase === "intro" && (
           <div className="flex flex-col items-center gap-6 animate-fade-in-up max-w-2xl">
-            <DialogueBox speaker="Narrator">
+            <DialogueBox speaker="Рассказчик">
               <p>
-                The Cozy Street is alive with the spirit of the season. Neighbors are helping each
-                other hang decorations and prepare warm treats. To find the Crystal of Kindness,
-                Ainazik must match the words that represent acts of kindness.
+                Уютная Улица полна новогоднего настроения. Соседи помогают друг другу украшать дома
+                и готовить тёплые угощения. Чтобы найти Кристалл Доброты, Айназик должна
+                сопоставить слова, которые отражают проявления доброты.
               </p>
             </DialogueBox>
             <GameButton onClick={() => setPhase("game")} data-testid="button-start-game">
-              Play Memory Game
+              Играть в мемори
             </GameButton>
           </div>
         )}
@@ -157,7 +157,7 @@ export default function ChapterCozyStreet() {
         {phase === "game" && (
           <div className="flex flex-col items-center gap-6 animate-fade-in-up">
             <p className="text-pink-200 font-medium mb-2">
-              Match the pairs of kindness words ({matchedPairs}/{memoryPairs.length})
+              Найди пары слов ({matchedPairs}/{memoryPairs.length})
             </p>
 
             <div className="grid grid-cols-4 gap-3 md:gap-4 max-w-lg" data-testid="memory-game-grid">
@@ -188,7 +188,7 @@ export default function ChapterCozyStreet() {
               <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50 animate-fade-in-up">
                 <div className="flex flex-col items-center gap-4 p-8 bg-card/95 rounded-3xl">
                   <CrystalDisplay type="kindness" collected size="lg" animate />
-                  <p className="font-display text-xl text-foreground">Crystal of Kindness Found!</p>
+                  <p className="font-display text-xl text-foreground">Кристалл Доброты найден!</p>
                 </div>
               </div>
             )}
@@ -198,15 +198,15 @@ export default function ChapterCozyStreet() {
         {phase === "success" && (
           <div className="flex flex-col items-center gap-6 animate-fade-in-up max-w-2xl">
             <CrystalDisplay type="kindness" collected size="lg" />
-            <DialogueBox speaker="Neighbor">
+            <DialogueBox speaker="Сосед">
               <p>
-                Thank you for helping us match these memories of kindness, Ainazik! You've reminded
-                us all of what makes our street so special. Take this crystal — it holds the warmth
-                of every kind act shared on this street.
+                Спасибо, что помогла нам собрать эти воспоминания о доброте, Айназик! Ты напомнила
+                нам всем, что делает нашу улицу такой особенной. Возьми этот кристалл — в нём тепло
+                каждого доброго поступка, совершённого здесь.
               </p>
             </DialogueBox>
             <GameButton onClick={handleContinue} size="lg" data-testid="button-continue">
-              Continue to the Market
+              Перейти к Рынку
             </GameButton>
           </div>
         )}

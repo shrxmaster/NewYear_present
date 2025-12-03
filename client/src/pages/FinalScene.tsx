@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useGame } from "@/lib/game-context";
 import { SceneWrapper } from "@/components/game/SceneWrapper";
 import { DialogueBox } from "@/components/game/DialogueBox";
@@ -14,6 +14,7 @@ export default function FinalScene() {
   const [phase, setPhase] = useState<ScenePhase>("placing");
   const [starLit, setStarLit] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+  const fireworksAudioRef = useRef<HTMLAudioElement | null>(null);
 
   const allCrystalsCollected =
     gameState.crystals.kindness &&
@@ -26,6 +27,24 @@ export default function FinalScene() {
       const timer = setTimeout(() => {
         setStarLit(true);
         setTimeout(() => {
+          // Play fireworks sound with proper error handling
+          const playFireworksSound = async () => {
+            try {
+              const audio = new Audio('/sounds/fireworks.mp3');
+              audio.volume = 0.6;
+              const playPromise = audio.play();
+              
+              if (playPromise !== undefined) {
+                await playPromise;
+                fireworksAudioRef.current = audio;
+              }
+            } catch (error) {
+              console.error('Fireworks sound error:', error);
+            }
+          };
+
+          playFireworksSound();
+          
           setShowConfetti(true);
           setPhase("celebration");
           completeChapter("final");
@@ -37,6 +56,10 @@ export default function FinalScene() {
   }, [phase, completeChapter, completeGame]);
 
   const handlePlaceCrystals = () => {
+    // Unlock audio playback with user interaction
+    const dummy = new Audio();
+    dummy.play().catch(() => {});
+    
     setPhase("lighting");
   };
 
@@ -48,21 +71,25 @@ export default function FinalScene() {
     goToChapter("start");
   };
 
+  const handleViewGratitude = () => {
+    goToChapter("gratitude");
+  };
+
   return (
     <SceneWrapper
       backgroundClass={`transition-all duration-2000 ${
         starLit
-          ? "bg-gradient-to-b from-amber-900/80 via-orange-900 to-slate-900"
-          : "bg-gradient-to-b from-amber-950 via-stone-900 to-slate-950"
+          ? "bg-gradient-to-b from-yellow-800/80 via-red-900 to-green-900"
+          : "bg-gradient-to-b from-red-950 via-green-950 to-red-950"
       }`}
     >
       <div className="min-h-screen flex flex-col items-center px-6 py-20">
         <div className="text-center mb-8 animate-fade-in-up">
           <span className="inline-block px-4 py-1 bg-amber-800/50 rounded-full text-amber-300 text-sm font-medium mb-2">
-            Final Chapter
+            Финальная глава
           </span>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-amber-100" data-testid="text-chapter-title">
-            The Star's Glow
+            Сияние звезды
           </h2>
         </div>
 
@@ -70,11 +97,9 @@ export default function FinalScene() {
           <div className="flex flex-col items-center gap-8 animate-fade-in-up max-w-2xl">
             <Star lit={false} size="xl" />
 
-            <DialogueBox speaker="Ainazik">
+            <DialogueBox speaker="Айназик">
               <p>
-                "I've gathered all four Memory Crystals! The Crystal of Kindness from the Cozy
-                Street, the Crystal of Memories from the Market, the Crystal of Courage from the
-                Winter Forest, and the Crystal of Unity from the Celebration Square."
+                «Я собрала все четыре Кристалла Памяти! Кристалл Доброты с Уютной улицы, Кристалл Воспоминаний с Рынка, Кристалл Смелости из Зимнего леса и Кристалл Единства с Площади Празднования».
               </p>
             </DialogueBox>
 
@@ -82,15 +107,14 @@ export default function FinalScene() {
               <CrystalCollection crystals={gameState.crystals} size="md" />
             </div>
 
-            <DialogueBox speaker="The Star">
+            <DialogueBox speaker="Звезда">
               <p>
-                "You've done it, Ainazik! Place the crystals upon me, and together we shall bring
-                light and hope to the town once more."
+                «Ты справилась, Айназик! Помести кристаллы на меня, и вместе мы вновь принесём свет и надежду в город».
               </p>
             </DialogueBox>
 
             <GameButton onClick={handlePlaceCrystals} size="lg" icon="sparkle" data-testid="button-place-crystals">
-              Place the Crystals
+              Поместить кристаллы
             </GameButton>
           </div>
         )}
@@ -107,7 +131,7 @@ export default function FinalScene() {
             </div>
 
             <p className="font-display text-xl text-amber-200 animate-pulse">
-              {starLit ? "The star shines once more..." : "Placing the crystals..."}
+              {starLit ? "Звезда снова сияет..." : "Размещаем кристаллы..."}
             </p>
           </div>
         )}
@@ -144,32 +168,29 @@ export default function FinalScene() {
                 className="font-display text-3xl md:text-4xl font-bold bg-gradient-to-r from-amber-200 via-yellow-300 to-amber-200 bg-clip-text text-transparent"
                 data-testid="text-happy-new-year"
               >
-                Happy New Year, Ainazik!
+                С Новым годом, Айназик!
               </h3>
               <PartyPopper className="w-8 h-8 text-amber-400 scale-x-[-1]" />
             </div>
 
-            <DialogueBox speaker="The Star">
+            <DialogueBox speaker="Звезда">
               <p>
-                "Thank you, dear Ainazik. You've shown that the true magic of New Year lies not in
-                lights or decorations, but in kindness, cherished memories, courage, and the unity
-                of those we love. May this light guide you through all the years to come."
+                «Спасибо, дорогая Айназик. Ты показала, что истинная магия Нового года заключается не в огнях или украшениях, а в доброте, дорогих воспоминаниях, смелости и единстве близких. Пусть этот свет ведёт тебя на протяжении всех лет».
               </p>
             </DialogueBox>
 
-            <DialogueBox speaker="Ainazik">
+            <DialogueBox speaker="Айназик">
               <p>
-                "This was the most magical adventure! I'll never forget the lessons I learned and
-                the friends I made along the way. Happy New Year to everyone!"
+                «Это было самое волшебное приключение! Я никогда не забуду уроки, которые я извлекла, и друзей, которых встретила. С Новым годом всех!»
               </p>
             </DialogueBox>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 mt-4">
-              <GameButton onClick={handleViewCollection} size="lg" icon="sparkle" data-testid="button-view-collection">
-                View Collection
+              <GameButton onClick={handleViewGratitude} size="lg" icon="sparkle" data-testid="button-view-gratitude">
+                Далее
               </GameButton>
               <GameButton onClick={handlePlayAgain} variant="secondary" icon="restart" data-testid="button-play-again">
-                Play Again
+                Играть снова
               </GameButton>
             </div>
           </div>

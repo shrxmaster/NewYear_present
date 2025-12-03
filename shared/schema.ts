@@ -27,7 +27,7 @@ export interface Crystal {
   icon: string;
 }
 
-export type ChapterKey = "start" | "attic" | "cozyStreet" | "market" | "forest" | "square" | "final" | "collection";
+export type ChapterKey = "start" | "attic" | "cozyStreet" | "market" | "forest" | "square" | "final" | "collection" | "gratitude";
 
 export interface GameState {
   currentChapter: ChapterKey;
@@ -93,4 +93,5 @@ export const chapterInfo: Record<ChapterKey, { title: string; order: number }> =
   square: { title: "Celebration Square", order: 5 },
   final: { title: "The Star's Glow", order: 6 },
   collection: { title: "Collection", order: 7 },
+  gratitude: { title: "Thank You", order: 8 },
 };

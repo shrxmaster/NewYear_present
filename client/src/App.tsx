@@ -3,6 +3,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { GameProvider, useGame } from "@/lib/game-context";
+import { BackgroundMusic } from "@/components/game/BackgroundMusic";
 import StartScreen from "@/pages/StartScreen";
 import ChapterAttic from "@/pages/ChapterAttic";
 import ChapterCozyStreet from "@/pages/ChapterCozyStreet";
@@ -11,6 +12,7 @@ import ChapterForest from "@/pages/ChapterForest";
 import ChapterSquare from "@/pages/ChapterSquare";
 import FinalScene from "@/pages/FinalScene";
 import CollectionPage from "@/pages/CollectionPage";
+import GratitudePage from "@/pages/GratitudePage";
 
 function GameRouter() {
   const { gameState, isShowingStartScreen } = useGame();
@@ -41,6 +43,8 @@ function GameRouter() {
         return <FinalScene />;
       case "collection":
         return <CollectionPage />;
+      case "gratitude":
+        return <GratitudePage />;
       default:
         return <StartScreen />;
     }
@@ -58,6 +62,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <GameProvider>
+          <BackgroundMusic />
           <GameRouter />
           <Toaster />
         </GameProvider>

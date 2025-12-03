@@ -37,6 +37,17 @@ export function GameProvider({ children }: { children: ReactNode }) {
     return defaultGameState;
   });
 
+  // Применяем тему при загрузке и изменении
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const root = document.documentElement;
+      // Удаляем все предыдущие классы темы
+      root.classList.remove("theme-blue", "theme-pink", "theme-purple", "theme-mint");
+      // Добавляем новый класс темы
+      root.classList.add(`theme-${gameState.themeColor}`);
+    }
+  }, [gameState.themeColor]);
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem(STORAGE_KEY);

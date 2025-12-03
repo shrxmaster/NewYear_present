@@ -26,7 +26,10 @@ function shufflePuzzle(puzzle: number[]): number[] {
     if (col < 2) moves.push(emptyIndex + 1);
 
     const randomMove = moves[Math.floor(Math.random() * moves.length)];
-    [shuffled[emptyIndex], shuffled[randomMove]] = [shuffled[randomMove], shuffled[emptyIndex]];
+    [shuffled[emptyIndex], shuffled[randomMove]] = [
+      shuffled[randomMove],
+      shuffled[emptyIndex],
+    ];
   }
   return shuffled;
 }
@@ -60,7 +63,10 @@ export default function ChapterForest() {
 
     if (isAdjacent) {
       const newPuzzle = [...puzzle];
-      [newPuzzle[index], newPuzzle[emptyIndex]] = [newPuzzle[emptyIndex], newPuzzle[index]];
+      [newPuzzle[index], newPuzzle[emptyIndex]] = [
+        newPuzzle[emptyIndex],
+        newPuzzle[index],
+      ];
       setPuzzle(newPuzzle);
       setMoves(moves + 1);
 
@@ -94,24 +100,32 @@ export default function ChapterForest() {
   ];
 
   return (
-    <SceneWrapper backgroundClass="bg-gradient-to-b from-slate-900 via-blue-950 to-slate-950">
+    <SceneWrapper backgroundClass="bg-gradient-to-b from-red-950 via-green-950 to-red-950">
       <div className="min-h-screen flex flex-col items-center px-6 py-20">
         <div className="text-center mb-8 animate-fade-in-up">
           <span className="inline-block px-4 py-1 bg-blue-900/50 rounded-full text-blue-300 text-sm font-medium mb-2">
-            Chapter 4
+            Глава 4
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-blue-100" data-testid="text-chapter-title">
-            Winter Forest
+          <h2
+            className="font-display text-4xl md:text-5xl font-bold text-blue-100"
+            data-testid="text-chapter-title"
+          >
+            Зимний лес
           </h2>
         </div>
 
+        {/* Декор */}
         <div className="relative mb-8">
           <div className="flex gap-4 justify-center">
             {[...Array(5)].map((_, i) => (
               <TreePine
                 key={i}
-                className={`text-emerald-700/80 ${i % 2 === 0 ? "w-10 h-10" : "w-8 h-8"}`}
-                style={{ transform: `translateY(${i % 2 === 0 ? 0 : 8}px)` }}
+                className={`text-emerald-700/80 ${
+                  i % 2 === 0 ? "w-10 h-10" : "w-8 h-8"
+                }`}
+                style={{
+                  transform: `translateY(${i % 2 === 0 ? 0 : 8}px)`,
+                }}
               />
             ))}
           </div>
@@ -120,31 +134,38 @@ export default function ChapterForest() {
           </div>
         </div>
 
+        {/* Интро */}
         {phase === "intro" && (
           <div className="flex flex-col items-center gap-6 animate-fade-in-up max-w-2xl">
-            <DialogueBox speaker="Narrator">
+            <DialogueBox speaker="Рассказчик">
               <p>
-                The Winter Forest stands quiet and still, blanketed in fresh snow. The moonlight
-                filters through the frozen branches, casting silver shadows on the ground. But the
-                path ahead is blocked by ice puzzles...
+                Зимний лес стоит тихий и неподвижный, укрытый свежим снегом. Лунный свет проходит
+                сквозь замёрзшие ветви, оставляя серебристые тени на земле. Но дальше путь
+                перекрыт ледяной головоломкой…
               </p>
             </DialogueBox>
-            <DialogueBox speaker="Ainazik">
+
+            <DialogueBox speaker="Айназик">
               <p>
-                "This puzzle seems daunting, but I must be brave. Grandmother always said that
-                courage isn't about not being afraid — it's about taking the next step anyway."
+                «Эта головоломка выглядит сложной… но я должна быть смелой. Бабушка всегда
+                говорила: смелость — это не отсутствие страха, а шаг вперёд, несмотря на него».
               </p>
             </DialogueBox>
-            <GameButton onClick={() => setPhase("game")} data-testid="button-start-game">
-              Clear the Path
+
+            <GameButton
+              onClick={() => setPhase("game")}
+              data-testid="button-start-game"
+            >
+              Расчистить путь
             </GameButton>
           </div>
         )}
 
+        {/* Игра */}
         {phase === "game" && (
           <div className="flex flex-col items-center gap-6 animate-fade-in-up">
             <p className="text-blue-200 font-medium mb-2">
-              Slide the tiles to clear the frozen path (Moves: {moves})
+              Передвигай плитки, чтобы пройти по замёрзшей тропе (Ходы: {moves})
             </p>
 
             <div
@@ -161,9 +182,10 @@ export default function ChapterForest() {
                     flex items-center justify-center
                     font-display text-2xl md:text-3xl font-bold
                     transition-all duration-200
-                    ${tile === 0
-                      ? "bg-slate-900/50 cursor-default"
-                      : `bg-gradient-to-br ${tileColors[tile]} text-white shadow-lg hover:scale-105 cursor-pointer`
+                    ${
+                      tile === 0
+                        ? "bg-slate-900/50 cursor-default"
+                        : `bg-gradient-to-br ${tileColors[tile]} text-white shadow-lg hover:scale-105 cursor-pointer`
                     }
                   `}
                   data-testid={`puzzle-tile-${index}`}
@@ -179,38 +201,48 @@ export default function ChapterForest() {
             </div>
 
             <p className="text-blue-300/70 text-sm">
-              Arrange tiles 1-8 in order, with empty space at bottom-right
+              Собери плитки 1–8 по порядку, оставив пустую клетку внизу справа
             </p>
 
             {showCrystal && (
               <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50 animate-fade-in-up">
                 <div className="flex flex-col items-center gap-4 p-8 bg-card/95 rounded-3xl">
                   <CrystalDisplay type="courage" collected size="lg" animate />
-                  <p className="font-display text-xl text-foreground">Crystal of Courage Found!</p>
+                  <p className="font-display text-xl text-foreground">
+                    Кристалл Смелости найден!
+                  </p>
                 </div>
               </div>
             )}
           </div>
         )}
 
+        {/* Успех */}
         {phase === "success" && (
           <div className="flex flex-col items-center gap-6 animate-fade-in-up max-w-2xl">
             <CrystalDisplay type="courage" collected size="lg" />
-            <DialogueBox speaker="Narrator">
+
+            <DialogueBox speaker="Рассказчик">
               <p>
-                With patience and determination, Ainazik solved the frozen puzzle. The path ahead
-                cleared, revealing a beautiful crystal that glowed with an inner light — the Crystal
-                of Courage, for those brave enough to face the unknown.
+                Проявив терпение и настойчивость, Айназик разгадала ледяную головоломку. Путь
+                расчистился, открыв сияющий Кристалл Смелости — награду тем, кто не боится идти
+                вперёд, даже если дорога кажется неподъёмной.
               </p>
             </DialogueBox>
-            <DialogueBox speaker="Ainazik">
+
+            <DialogueBox speaker="Айназик">
               <p>
-                "I did it! Even when the path seemed impossible, I kept trying. Maybe that's what
-                courage really means."
+                «Я смогла! Даже когда казалось невозможно — я продолжала пробовать. Наверное, в
+                этом и есть настоящая смелость».
               </p>
             </DialogueBox>
-            <GameButton onClick={handleContinue} size="lg" data-testid="button-continue">
-              Continue to the Square
+
+            <GameButton
+              onClick={handleContinue}
+              size="lg"
+              data-testid="button-continue"
+            >
+              Продолжить к Площади
             </GameButton>
           </div>
         )}
