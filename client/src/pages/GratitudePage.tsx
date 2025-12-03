@@ -147,7 +147,7 @@ export default function GratitudePage() {
     const lineHeight = isMobile ? 15 : 20;
 
     // Заголовок
-    const titleSize = isMobile ? 28 : 40;
+    const titleSize = isMobile ? 26 : 37;
     ctx.font = `bold ${titleSize}px "Playfair Display", serif`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
@@ -196,11 +196,11 @@ export default function GratitudePage() {
         currentY += lineHeight / 2;
       } else {
         if (msg.includes("Айназик") || msg.includes("Счастливого Нового года!")) {
-          const boldSize = isMobile ? 12 : 16;
+          const boldSize = isMobile ? 11 : 14;
           ctx.font = `bold ${boldSize}px "Montserrat", sans-serif`;
           ctx.fillStyle = "#ffd700";
         } else {
-          const textSize = isMobile ? 11 : 15;
+          const textSize = isMobile ? 10 : 13;
           ctx.font = `${textSize}px "Montserrat", sans-serif`;
           ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
         }
@@ -238,8 +238,8 @@ export default function GratitudePage() {
 
     // Подпись
     currentY += isMobile ? 10 : 15;
-    const signatureSize = isMobile ? 12 : 15;
-    const nameSize = isMobile ? 14 : 18;
+    const signatureSize = isMobile ? 11 : 13;
+    const nameSize = isMobile ? 13 : 16;
     
     ctx.font = `italic ${signatureSize}px "Montserrat", sans-serif`;
     ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
