@@ -30,7 +30,7 @@ export default function FinalScene() {
           // Play fireworks sound with proper error handling
           const playFireworksSound = async () => {
             try {
-              const audio = new Audio('/sounds/fireworks.mp3');
+              const audio = new Audio(`${import.meta.env.BASE_URL}sounds/fireworks.mp3`);
               audio.volume = 0.6;
               const playPromise = audio.play();
               

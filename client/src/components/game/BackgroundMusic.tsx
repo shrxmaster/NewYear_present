@@ -109,7 +109,7 @@ export function BackgroundMusic() {
       preload="auto"
       style={{ display: "none" }}
     >
-      <source src="/sounds/background/Christmas Village - Aaron Kenny.mp3" type="audio/mpeg" />
+      <source src={`${import.meta.env.BASE_URL}sounds/background/Christmas Village - Aaron Kenny.mp3`} type="audio/mpeg" />
     </audio>
   );
 }

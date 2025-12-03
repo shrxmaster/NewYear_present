@@ -72,7 +72,7 @@ export function GratitudeMusic() {
   return (
     <audio
       ref={audioRef}
-      src="/sounds/gratitude/José Feliciano - Feliz Navidad.mp3"
+      src={`${import.meta.env.BASE_URL}sounds/gratitude/José Feliciano - Feliz Navidad.mp3`}
       preload="auto"
       style={{ display: "none" }}
     />
