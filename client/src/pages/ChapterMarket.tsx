@@ -31,7 +31,7 @@ interface MarketItem {
   wrong?: boolean;
 }
 
-const shoppingList = ["Подарочная коробка", "Печенье", "Горячее какао", "Карамельная трость", "Яблоко"];
+const shoppingList = ["Подарочная коробка", "Печенье", "Горячее какао", "Конфета", "Яблоко"];
 
 const initialItems: MarketItem[] = [
   { id: "gift", name: "Подарочная коробка", icon: Gift, found: false, position: { x: 15, y: 30 }, required: true },
